@@ -1,5 +1,4 @@
 from django_filters.rest_framework import BooleanFilter, FilterSet, filters
-
 from users.models import Ingredient, Recipe, Tag
 
 

@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'default')
 
 DEBUG = True
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(', ')
+ALLOWED_HOSTS = ['127.0.0.1', '158.160.29.241', 'praktikum.webhop.me']
 
 INSTALLED_APPS = [
     'django.contrib.admin',

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# flake8: noqa
 from .user_serializers import (
     AvatarSerializer,
     UserRegistrationSerializer,
