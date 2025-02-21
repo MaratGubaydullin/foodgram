@@ -2,21 +2,35 @@ import re
 
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.exceptions import ValidationError
-from .constants import IngredientConstants, RecipeConstants
+from django.utils.translation import gettext_lazy as _
 
+from foodgram.constants import IngredientConstants, RecipeConstants
 
 MIN_LEN_USERNAME = 3
 MAX_LEN_USERNAME = 150
+
+
+def validate_not_empty(value):
+    if not value or str(value).strip() == '':
+        raise ValidationError(
+            _('Это поле не может быть пустым.'),
+            code='required'
+        )
 
 
 def validate_correct_username(data):
     if data.lower() == 'me':
         raise ValidationError('Имя пользователя не может быть "me"')
     if not re.match(r'^[\w.@+-]+$', data):
-        raise ValidationError('Имя пользователя содержит недопустимый символ')
+        raise ValidationError(
+            'Имя пользователя может содержать только буквы, '
+            'цифры и символы @/./+/-/_'
+        )
     if len(data) < MIN_LEN_USERNAME or len(data) > MAX_LEN_USERNAME:
         raise ValidationError(
-            'Имя пользователя должно иметь длину от 3 до 150 символов.')
+            f'Имя пользователя должно быть от {MIN_LEN_USERNAME} '
+            f'до {MAX_LEN_USERNAME} символов.'
+        )
 
 
 def amount_range_validator(value):

@@ -1,16 +1,15 @@
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import (RegexValidator,
-                                    MaxValueValidator,
-                                    MinValueValidator)
 from django.db import models
 
-from .validators import (validate_correct_username,
-                         validate_username,
-                         amount_range_validator)
-from .constants import (RecipeConstants,
-                        IngredientConstants,
-                        UserConstants,
-                        TagConstants)
+from foodgram.constants import (IngredientConstants,
+                                RecipeConstants,
+                                TagConstants,
+                                UserConstants)
+
+from .validators import (amount_range_validator,
+                         validate_correct_username,
+                         validate_not_empty,
+                         validate_username)
 
 
 class Follow(models.Model):
@@ -19,13 +18,13 @@ class Follow(models.Model):
     user = models.ForeignKey(
         'User',
         on_delete=models.CASCADE,
-        related_name='follower',
+        related_name='subscriber',
         verbose_name='Подписчик',
     )
     author = models.ForeignKey(
         'User',
         on_delete=models.CASCADE,
-        related_name='following',
+        related_name='follower',
         verbose_name='Автор',
     )
 
@@ -62,12 +61,14 @@ class User(AbstractUser):
     first_name = models.CharField(
         'Имя',
         max_length=UserConstants.MAX_FIRST_NAME_LENGTH,
-        blank=True
+        blank=True,
+        validators=[validate_not_empty]
     )
     last_name = models.CharField(
         'Фамилия',
         max_length=UserConstants.MAX_LAST_NAME_LENGTH,
-        blank=True
+        blank=True,
+        validators=[validate_not_empty]
     )
     email = models.EmailField(
         'email',
@@ -267,12 +268,12 @@ class Tag(models.Model):
     name = models.CharField(
         "Название",
         unique=True,
-        max_length=TagConstants.MAX_LENGTH,
+        max_length=TagConstants.TAG_MAX_LENGTH,
     )
     slug = models.CharField(
         'Slug',
         unique=True,
-        max_length=TagConstants.MAX_LENGTH
+        max_length=TagConstants.TAG_MAX_LENGTH
     )
 
     class Meta:

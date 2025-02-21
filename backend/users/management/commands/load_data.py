@@ -30,7 +30,8 @@ class Command(BaseCommand):
         if not csv_file_path:
             self.stdout.write(
                 self.style.ERROR(
-                    'Не указан путь к CSV-файлу. Используйте --path <путь_к_файлу>.'
+                    'Не указан путь к CSV-файлу.'
+                    'Используйте --path <путь_к_файлу>.'
                 )
             )
             return
@@ -80,7 +81,7 @@ class Command(BaseCommand):
                         )
                         self.stdout.write(
                             self.style.ERROR(
-                                f'Ошибка при добавлении ингредиента "{name}": {e}'
+                                f'Ошибка добавления ингредиента {name}: {e}'
                             )
                         )
 

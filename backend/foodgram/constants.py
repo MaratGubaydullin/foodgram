@@ -20,4 +20,4 @@ class UserConstants:
 
 
 class TagConstants:
-    MAX_LENGTH = 32
+    TAG_MAX_LENGTH = 32

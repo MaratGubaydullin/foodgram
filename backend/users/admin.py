@@ -1,15 +1,10 @@
+from admin_auto_filters.filters import AutocompleteFilter
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.utils.html import format_html
-from admin_auto_filters.filters import AutocompleteFilter
 
-from .models import (Favorite,
-                     Ingredient,
-                     Recipe,
-                     RecipeToIngredient,
-                     ShoppingList,
-                     Tag)
+from .models import (Favorite, Ingredient, Recipe, RecipeToIngredient,
+                     ShoppingList, Tag)
 
 EMPTY_FIELD_VALUE = 'Не задано'
 INLINE_FORM_EXTRA = 1
@@ -131,7 +126,7 @@ class RecipeAdmin(admin.ModelAdmin):
         return (
             super().get_queryset(request)
             .select_related('author')
-            .prefetch_related('ingredients', 'tags')
+            .prefetch_related('ingredients', 'tags', 'favorite')
         )
 
 
