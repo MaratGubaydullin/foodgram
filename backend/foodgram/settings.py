@@ -41,7 +41,8 @@ MIDDLEWARE = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://foodgram.myddns.me/',
+    'https://foodgram.myddns.me',
+    'http://foodgram.myddns.me',
 ]
 
 ROOT_URLCONF = 'foodgram.urls'
