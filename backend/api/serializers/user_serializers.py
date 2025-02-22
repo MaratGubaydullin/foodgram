@@ -1,12 +1,12 @@
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer
+from foodgram.constants import UserConstants
 from rest_framework import serializers
+from users.models import Favorite, Follow, Recipe, ShoppingList
+from users.validators import validate_correct_username, validate_not_empty
 
-from users.models import Follow, Recipe, ShoppingList, Favorite
-from users.validators import validate_not_empty, validate_correct_username
 from .avatar_serializers import CostomImageField
 from .recipe_serializers import RecipeBriefInfoSerializer
-from foodgram.constants import UserConstants
 
 User = get_user_model()
 

@@ -2,7 +2,6 @@ import csv
 import logging
 
 from django.core.management.base import BaseCommand
-
 from users.models import Ingredient
 
 

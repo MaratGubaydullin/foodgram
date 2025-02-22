@@ -1,6 +1,5 @@
 from api.urls import urls as api_urls
 from api.views import short_url_generate
-
 from django.contrib import admin
 from django.urls import include, path
 

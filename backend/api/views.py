@@ -10,29 +10,19 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from users.models import (Favorite, Ingredient, Recipe, RecipeToIngredient,
+                          ShoppingList, Tag)
 
-from users.models import (
-    Favorite,
-    Ingredient,
-    Recipe,
-    RecipeToIngredient,
-    ShoppingList,
-    Tag,
-)
 from api.filters import IngredientFilter, RecipeFilter
 from api.pagination import CustomLimitPagination
 from api.permissions import IsAdminOrAuthorOrReadOnly
-from api.serializers import (
-    AvatarSerializer,
-    FavoriteRecipeSerializer,
-    IngredientInfoSerializer,
-    RecipeCreateSerializer,
-    RecipeInfoSerializer,
-    ShoppingCartRecipeSerializer,
-    SubscriptionSerializer,
-    TagInfoSerializer,
-    UserProfileSerializer,
-)
+from api.serializers import (AvatarSerializer, FavoriteRecipeSerializer,
+                             IngredientInfoSerializer, RecipeCreateSerializer,
+                             RecipeInfoSerializer,
+                             ShoppingCartRecipeSerializer,
+                             SubscriptionSerializer, TagInfoSerializer,
+                             UserProfileSerializer)
+
 from .mixins import RecipeActionMixin, SubscriptionMixin
 from .utils import generate_shopping_list
 
