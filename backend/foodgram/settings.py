@@ -40,6 +40,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://foodgram.myddns.me/',
+]
+
 ROOT_URLCONF = 'foodgram.urls'
 
 TEMPLATES = [
