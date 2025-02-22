@@ -5,7 +5,7 @@ on:
     branches:
       - main
 jobs:
-  tests:
+  backend_tests:
     runs-on: ubuntu-latest
 
     services:
@@ -149,7 +149,9 @@ jobs:
           sudo docker compose -f docker-compose.production.yml pull
           sudo docker compose -f docker-compose.production.yml down
           sudo docker compose -f docker-compose.production.yml up -d
+          sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate users
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
+          sudo docker compose -f docker-compose.production.yml exec backend python manage.py load_data --path data/ingredients.csv
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
           sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/
 

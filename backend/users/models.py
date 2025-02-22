@@ -1,15 +1,11 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from foodgram.constants import (IngredientConstants,
-                                RecipeConstants,
-                                TagConstants,
-                                UserConstants)
+from foodgram.constants import (IngredientConstants, RecipeConstants,
+                                TagConstants, UserConstants)
 
-from .validators import (amount_range_validator,
-                         validate_correct_username,
-                         validate_not_empty,
-                         validate_username)
+from .validators import (amount_range_validator, validate_correct_username,
+                         validate_not_empty, validate_username)
 
 
 class Follow(models.Model):
