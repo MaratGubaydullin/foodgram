@@ -13,17 +13,15 @@ from rest_framework.reverse import reverse
 from users.models import (Favorite, Ingredient, Recipe, RecipeToIngredient,
                           ShoppingList, Tag)
 
-from api.filters import IngredientFilter, RecipeFilter
-from api.pagination import CustomLimitPagination
-from api.permissions import IsAdminOrAuthorOrReadOnly
-from api.serializers import (AvatarSerializer, FavoriteRecipeSerializer,
-                             IngredientInfoSerializer, RecipeCreateSerializer,
-                             RecipeInfoSerializer,
-                             ShoppingCartRecipeSerializer,
-                             SubscriptionSerializer, TagInfoSerializer,
-                             UserProfileSerializer)
-
+from .filters import IngredientFilter, RecipeFilter
 from .mixins import RecipeActionMixin, SubscriptionMixin
+from .pagination import CustomLimitPagination
+from .permissions import IsAdminOrAuthorOrReadOnly
+from .serializers import (AvatarSerializer, FavoriteRecipeSerializer,
+                          IngredientInfoSerializer, RecipeCreateSerializer,
+                          RecipeInfoSerializer, ShoppingCartRecipeSerializer,
+                          SubscriptionSerializer, TagInfoSerializer,
+                          UserProfileSerializer)
 from .utils import generate_shopping_list
 
 User = get_user_model()

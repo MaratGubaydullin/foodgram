@@ -2,8 +2,8 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 
-from api.views import (CustomUserViewSet, IngredientListViewSet,
-                       RecipeManagementViewSet, TagListViewSet)
+from .views import (CustomUserViewSet, IngredientListViewSet,
+                    RecipeManagementViewSet, TagListViewSet)
 
 app_name = 'api'
 
