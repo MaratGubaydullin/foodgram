@@ -7,7 +7,7 @@ git clone https://github.com/yandex-praktikum/kittygram_backend.git
 ```
 
 ```
-cd kittygram_backend
+cd foodgram/backend
 ```
 
 Cоздать и активировать виртуальное окружение:
@@ -51,4 +51,9 @@ python3 manage.py load_data --path data/ingredients.csv
 
 ```
 python3 manage.py runserver
+```
+
+```
+Вот вы и запустили бэк проекта.
+Простите, но я не умею писать красивые ридмишки.
 ```
