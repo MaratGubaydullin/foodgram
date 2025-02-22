@@ -9,6 +9,7 @@ services:
 
   db:
     image: postgres:13.10
+    container_name: foodgram_database
     env_file: .env
     volumes:
       - pg_data_production:/var/lib/postgresql/data
@@ -16,6 +17,7 @@ services:
 
   backend:
     image: yamakasy116rus/foodgram_backend:latest
+    container_name: foodgram_backend
     env_file: .env
     depends_on:
       - db
@@ -25,6 +27,7 @@ services:
 
   frontend:
     image: yamakasy116rus/foodgram_frontend:latest
+    container_name: foodgram_frontend
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
@@ -32,6 +35,7 @@ services:
 
   infra:
     image: yamakasy116rus/foodgram_infra:latest
+    container_name: foodgram_infra
     env_file: .env
     depends_on:
       - frontend
