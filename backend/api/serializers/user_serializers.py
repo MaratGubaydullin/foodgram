@@ -1,21 +1,20 @@
-from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer
 from rest_framework import serializers
-from users.models import Favorite, Follow, Recipe, ShoppingList
-from users.validators import validate_correct_username, validate_not_empty
+
+from django.conf import settings
 
 from foodgram.constants import UserConstants
+from users.models import Favorite, Follow, Recipe, ShoppingList, User
+from users.validators import validate_correct_username, validate_not_empty
 
-from .avatar_serializers import CostomImageField
+from .avatar_serializers import CustomImageField
 from .recipe_serializers import RecipeBriefInfoSerializer
-
-User = get_user_model()
 
 
 class AvatarSerializer(serializers.ModelSerializer):
     """Сериализатор для обновления аватара пользователя."""
 
-    avatar = CostomImageField(allow_null=True)
+    avatar = CustomImageField(allow_null=True)
 
     class Meta:
         model = User
@@ -97,7 +96,8 @@ class SubscriptionSerializer(serializers.ModelSerializer):
 
     def get_recipes(self, obj):
         request = self.context.get('request')
-        limit = int(request.GET.get('recipes_limit', 6))
+        limit = int(request.GET.get('recipes_limit',
+                                    settings.DEFAULT_PAGE_SIZE))
         return RecipeBriefInfoSerializer(
             Recipe.objects.filter(author=obj)[:limit],
             many=True,

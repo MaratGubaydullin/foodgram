@@ -4,7 +4,7 @@ from django.core.files.base import ContentFile
 from rest_framework import serializers
 
 
-class CostomImageField(serializers.ImageField):
+class CustomImageField(serializers.ImageField):
     def to_internal_value(self, data):
         if data is None:
             return None

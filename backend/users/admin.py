@@ -4,12 +4,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from .models import (Favorite, Ingredient, Recipe, RecipeToIngredient,
-                     ShoppingList, Tag)
+                     ShoppingList, Tag, User)
 
 EMPTY_FIELD_VALUE = 'Не задано'
 INLINE_FORM_EXTRA = 1
-
-CustomUser = get_user_model()
 
 
 class AuthorFilter(AutocompleteFilter):
@@ -48,7 +46,7 @@ class RecipeToIngredientInLine(admin.TabularInline):
         )
 
 
-@admin.register(CustomUser)
+@admin.register(User)
 class CustomUserAdmin(BaseUserAdmin):
     """Admin configuration for the custom user model."""
 

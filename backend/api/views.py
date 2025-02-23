@@ -11,7 +11,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from users.models import (Favorite, Ingredient, Recipe, RecipeToIngredient,
-                          ShoppingList, Tag)
+                          ShoppingList, Tag, User)
 
 from .filters import IngredientFilter, RecipeFilter
 from .mixins import RecipeActionMixin, SubscriptionMixin
@@ -23,8 +23,6 @@ from .serializers import (AvatarSerializer, FavoriteRecipeSerializer,
                           SubscriptionSerializer, TagInfoSerializer,
                           UserProfileSerializer)
 from .utils import generate_shopping_list
-
-User = get_user_model()
 
 
 @require_GET

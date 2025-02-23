@@ -1,19 +1,17 @@
-from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404
 from djoser.serializers import UserSerializer
+from django.db import transaction
 from rest_framework import serializers
+
 from users.models import (Favorite, Ingredient, Recipe, RecipeToIngredient,
-                          ShoppingList, Tag)
+                          ShoppingList, Tag, User)
 
-from .avatar_serializers import CostomImageField
-
-User = get_user_model()
+from .avatar_serializers import CustomImageField
 
 
 class UserProfileSerializer(UserSerializer):
     """Сериализатор для представления информации о пользователе."""
 
-    avatar = CostomImageField(required=False, allow_null=True)
+    avatar = CustomImageField(required=False, allow_null=True)
     is_subscribed = serializers.SerializerMethodField()
 
     class Meta(UserSerializer.Meta):
@@ -75,7 +73,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
     ingredients = RecipeIngredientCreateSerializer(
         many=True, label='Ingredients'
     )
-    image = CostomImageField(allow_null=True, label='images')
+    image = CustomImageField(allow_null=True, label='images')
 
     class Meta:
         model = Recipe
@@ -88,6 +86,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
             'text',
         )
 
+    @transaction.atomic
     def create(self, validated_data):
         ingredients = validated_data.pop('ingredients')
         tags = validated_data.pop('tags')
@@ -102,10 +101,11 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         result = []
         for ingredient_data in ingredients:
             ingredient_id = ingredient_data['id']
-            ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
             amount = ingredient_data['amount']
             recipe_ingredient = RecipeToIngredient(
-                ingredient=ingredient, recipe=recipe, amount=amount
+                ingredient_id=ingredient_id,
+                recipe=recipe,
+                amount=amount
             )
             result.append(recipe_ingredient)
         RecipeToIngredient.objects.bulk_create(result)

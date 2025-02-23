@@ -8,7 +8,3 @@ urlpatterns = [
     path('api/', include(api_urls)),
     path('s/<int:pk>/', short_url_generate, name='short_url')
 ]
-
-# if settings.DEBUG:
-#     urlpatterns += static(settings.STATIC_URL,
-#                           document_root=settings.STATIC_ROOT)
