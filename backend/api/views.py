@@ -130,6 +130,12 @@ class RecipeManagementViewSet(viewsets.ModelViewSet, RecipeActionMixin):
     queryset = Recipe.objects.select_related(
         'author').prefetch_related('ingredients', 'tags')
 
+    def get_permissions(self):
+        """Разрешаем доступ без аутентификации: list, retrieve и get-link."""
+        if self.action in ('list', 'retrieve', 'get-link'):
+            return [AllowAny()]
+        return [IsAdminOrAuthorOrReadOnly()]
+
     def get_serializer_class(self):
         """Выбор сериализатора в зависимости от действия."""
         if self.action in ('list', 'retrieve', 'get-link'):
