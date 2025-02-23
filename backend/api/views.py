@@ -28,7 +28,7 @@ from .utils import generate_shopping_list
 def short_url_generate(request, pk):
     """Перенаправление по короткой ссылке рецепта."""
     get_object_or_404(Recipe, pk=pk)
-    url = reverse("recipes-detail", args=[pk])
+    url = reverse("recipes", args=[pk])
     return redirect(url)
 
 
@@ -131,7 +131,7 @@ class RecipeManagementViewSet(viewsets.ModelViewSet, RecipeActionMixin):
         'author').prefetch_related('ingredients', 'tags')
 
     def get_permissions(self):
-        """Разрешаем доступ без аутентификации: list, retrieve и get-link."""
+        """Разрешаем доступ без аутентификации list, retrieve и get-link."""
         if self.action in ('list', 'retrieve', 'get-link'):
             return [AllowAny()]
         return [IsAdminOrAuthorOrReadOnly()]
