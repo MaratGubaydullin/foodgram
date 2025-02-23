@@ -3,7 +3,6 @@ from rest_framework import serializers
 
 from django.conf import settings
 
-from foodgram.constants import UserConstants
 from users.models import Favorite, Follow, Recipe, ShoppingList, User
 from users.validators import validate_correct_username, validate_not_empty
 
@@ -25,17 +24,17 @@ class UserRegistrationSerializer(UserCreateSerializer):
     """Сериализатор для регистрации новых пользователей."""
 
     first_name = serializers.CharField(
-        max_length=UserConstants.MAX_FIRST_NAME_LENGTH,
+        max_length=settings.MAX_FIRST_NAME_LENGTH,
         validators=[validate_not_empty],
         required=True,
     )
     last_name = serializers.CharField(
-        max_length=UserConstants.MAX_LAST_NAME_LENGTH,
+        max_length=settings.MAX_LAST_NAME_LENGTH,
         validators=[validate_not_empty],
         required=True,
     )
     username = serializers.CharField(
-        max_length=UserConstants.MAX_USERNAME_LENGTH,
+        max_length=settings.MAX_USERNAME_LENGTH,
         validators=[validate_correct_username],
         required=True,
     )

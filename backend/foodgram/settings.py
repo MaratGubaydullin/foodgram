@@ -65,23 +65,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'foodgram.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('POSTGRES_DB', 'django'),
-#         'USER': os.getenv('POSTGRES_USER', 'django'),
-#         'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
-#         'HOST': os.getenv('DB_HOST', ''),
-#         'PORT': os.getenv('DB_PORT', 5432)
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DB', 'django'),
+        'USER': os.getenv('POSTGRES_USER', 'django'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
+        'HOST': os.getenv('DB_HOST', ''),
+        'PORT': os.getenv('DB_PORT', 5432)
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -142,3 +142,16 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFAULT_PAGE_SIZE = 6
+MAX_COOKING_TIME = 720
+MIN_COOKING_TIME = 1
+MAX_RECIPE_NAME_LENGTH = 256
+MAX_RECIPE_TEXT_LENGTH = 2000
+MAX_INGREDIENT_AMOUNT = 100
+MIN_INGREDIENT_AMOUNT = 1
+MAX_INGREDIENT_NAME_LENGTH = 128
+MAX_MEASUREMENT_UNIT_LENGTH = 64
+MAX_EMAIL_LENGTH = 254
+MAX_FIRST_NAME_LENGTH = 150
+MAX_LAST_NAME_LENGTH = 150
+MAX_USERNAME_LENGTH = 150
+TAG_MAX_LENGTH = 32

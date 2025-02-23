@@ -4,7 +4,7 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from foodgram.constants import IngredientConstants, RecipeConstants
+from django.conf import settings
 
 MIN_LEN_USERNAME = 3
 MAX_LEN_USERNAME = 150
@@ -34,28 +34,28 @@ def validate_correct_username(data):
 
 
 def amount_range_validator(value):
-    if value < IngredientConstants.MIN_INGREDIENT_AMOUNT:
+    if value < settings.MIN_INGREDIENT_AMOUNT:
         raise ValidationError(
             f'Неверное количество ингредиента! Не меньше: '
-            f'{IngredientConstants.MIN_INGREDIENT_AMOUNT} !'
+            f'{settings.MIN_INGREDIENT_AMOUNT} !'
         )
-    if value > IngredientConstants.MAX_INGREDIENT_AMOUNT:
+    if value > settings.MAX_INGREDIENT_AMOUNT:
         raise ValidationError(
             f'Неверное количество ингредиента! Не больше: '
-            f'{IngredientConstants.MAX_INGREDIENT_AMOUNT} !'
+            f'{settings.MAX_INGREDIENT_AMOUNT} !'
         )
 
 
 def cooking_time_range_validator(value):
-    if value < RecipeConstants.MIN_COOKING_TIME:
+    if value < settings.MIN_COOKING_TIME:
         raise ValidationError(
             f'Минимальное время приготовления - '
-            f'{RecipeConstants.MIN_COOKING_TIME} мин. !'
+            f'{settings.MIN_COOKING_TIME} мин. !'
         )
-    if value > RecipeConstants.MAX_COOKING_TIME:
+    if value > settings.MAX_COOKING_TIME:
         raise ValidationError(
             f'Максимальное время приготовления - '
-            f'{RecipeConstants.MAX_COOKING_TIME} мин. !'
+            f'{settings.MAX_COOKING_TIME} мин. !'
         )
 
 

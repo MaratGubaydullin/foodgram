@@ -28,7 +28,7 @@ from .utils import generate_shopping_list
 def short_url_generate(request, pk):
     """Перенаправление по короткой ссылке рецепта."""
     get_object_or_404(Recipe, pk=pk)
-    url = reverse("recipes", args=[pk])
+    url = reverse("recipes-detail", args=[pk])
     return redirect(url)
 
 

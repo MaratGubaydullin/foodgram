@@ -1,8 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from foodgram.constants import (IngredientConstants, RecipeConstants,
-                                TagConstants, UserConstants)
+from django.conf import settings
 
 from .validators import (amount_range_validator, validate_correct_username,
                          validate_not_empty, validate_username)
@@ -49,26 +48,26 @@ class User(AbstractUser):
     username = models.CharField(
         'Имя пользователя',
         validators=[validate_correct_username, validate_username],
-        max_length=UserConstants.MAX_USERNAME_LENGTH,
+        max_length=settings.MAX_USERNAME_LENGTH,
         unique=True,
         null=False,
         db_index=True,
     )
     first_name = models.CharField(
         'Имя',
-        max_length=UserConstants.MAX_FIRST_NAME_LENGTH,
+        max_length=settings.MAX_FIRST_NAME_LENGTH,
         blank=True,
         validators=[validate_not_empty]
     )
     last_name = models.CharField(
         'Фамилия',
-        max_length=UserConstants.MAX_LAST_NAME_LENGTH,
+        max_length=settings.MAX_LAST_NAME_LENGTH,
         blank=True,
         validators=[validate_not_empty]
     )
     email = models.EmailField(
         'email',
-        max_length=UserConstants.MAX_EMAIL_LENGTH,
+        max_length=settings.MAX_EMAIL_LENGTH,
         unique=True
     )
     avatar = models.ImageField(
@@ -131,7 +130,7 @@ class Recipe(models.Model):
 
     name = models.CharField(
         'Название',
-        max_length=RecipeConstants.MAX_RECIPE_NAME_LENGTH,
+        max_length=settings.MAX_RECIPE_NAME_LENGTH,
     )
     author = models.ForeignKey(
         User,
@@ -146,7 +145,7 @@ class Recipe(models.Model):
     )
     text = models.CharField(
         'Как готовить блюдо',
-        max_length=RecipeConstants.MAX_RECIPE_TEXT_LENGTH,
+        max_length=settings.MAX_RECIPE_TEXT_LENGTH,
     )
     cooking_time = models.PositiveSmallIntegerField(
         validators=[amount_range_validator],
@@ -206,11 +205,11 @@ class Ingredient(models.Model):
 
     name = models.CharField(
         'Название',
-        max_length=IngredientConstants.MAX_INGREDIENT_NAME_LENGTH,
+        max_length=settings.MAX_INGREDIENT_NAME_LENGTH,
     )
     measurement_unit = models.CharField(
         'Единица измерения',
-        max_length=IngredientConstants.MAX_MEASUREMENT_UNIT_LENGTH,
+        max_length=settings.MAX_MEASUREMENT_UNIT_LENGTH,
     )
 
     class Meta:
@@ -264,12 +263,12 @@ class Tag(models.Model):
     name = models.CharField(
         "Название",
         unique=True,
-        max_length=TagConstants.TAG_MAX_LENGTH,
+        max_length=settings.TAG_MAX_LENGTH,
     )
     slug = models.CharField(
         'Slug',
         unique=True,
-        max_length=TagConstants.TAG_MAX_LENGTH
+        max_length=settings.TAG_MAX_LENGTH
     )
 
     class Meta:
