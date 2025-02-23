@@ -30,7 +30,18 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r ./backend/requirements.txt 
-    - name: Test with flake8 and django tests
+
+    - name: Run isort
+      run: |
+        cd backend
+        isort . --config-file .isort.cfg
+
+    - name: Run flake8
+      run: |
+        cd backend
+        python -m flake8 .
+
+    - name: Test with Django tests
       env:
         POSTGRES_USER: foodgram_user
         POSTGRES_PASSWORD: foodgram_password
@@ -38,8 +49,7 @@ jobs:
         DB_HOST: 127.0.0.1
         DB_PORT: 5432
       run: |
-        python -m flake8 backend/
-        cd backend/
+        cd backend
         python manage.py test
 
   build_and_push_to_docker_hub:
