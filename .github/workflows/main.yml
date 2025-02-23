@@ -34,7 +34,7 @@ jobs:
     - name: Run isort
       run: |
         cd backend
-        isort . --config-file .isort.cfg
+        isort . --sp .isort.cfg
 
     - name: Run flake8
       run: |
