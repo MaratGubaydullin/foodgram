@@ -293,6 +293,14 @@ function App() {
               />
             </Route>
 
+            <Route exact path="/short/:id">
+              <SingleCard
+                loggedIn={loggedIn}
+                loadItem={loadSingleItem}
+                updateOrders={updateOrders}
+              />
+            </Route>
+
             <Route exact path="/about">
               <NotFound />
               {/* <About component={About} /> */}
