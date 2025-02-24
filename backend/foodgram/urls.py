@@ -6,5 +6,5 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(api_urls)),
-    path('short/<int:pk>/', short_url_generate, name='short_url')
+    # path('short/<int:pk>/', short_url_generate, name='short_url')
 ]
