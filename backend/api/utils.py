@@ -6,7 +6,8 @@ def generate_shopping_list(ingredients):
     Возвращает форматированную строку.
     """
     return '\n'.join(
-        f'{i["ingredient__name"]} - {i["sum"]} '
-        f'({i["ingredient__measurement_unit"]})'
-        for i in ingredients
+        'Суммированный список ингридиентов:'
+        f'{ingridient["ingredient__name"]} - {ingridient["sum"]} '
+        f'({ingridient["ingredient__measurement_unit"]})'
+        for ingridient in ingredients
     )
