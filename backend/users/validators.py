@@ -36,12 +36,12 @@ def validate_correct_username(data):
 def amount_range_validator(value):
     if value < settings.MIN_INGREDIENT_AMOUNT:
         raise ValidationError(
-            f'Неверное количество ингредиента! Не меньше: '
+            'Неверное количество ингредиента! Не меньше: '
             f'{settings.MIN_INGREDIENT_AMOUNT} !'
         )
     if value > settings.MAX_INGREDIENT_AMOUNT:
         raise ValidationError(
-            f'Неверное количество ингредиента! Не больше: '
+            'Неверное количество ингредиента! Не больше: '
             f'{settings.MAX_INGREDIENT_AMOUNT} !'
         )
 
@@ -49,12 +49,12 @@ def amount_range_validator(value):
 def cooking_time_range_validator(value):
     if value < settings.MIN_COOKING_TIME:
         raise ValidationError(
-            f'Минимальное время приготовления - '
+            'Минимальное время приготовления - '
             f'{settings.MIN_COOKING_TIME} мин. !'
         )
     if value > settings.MAX_COOKING_TIME:
         raise ValidationError(
-            f'Максимальное время приготовления - '
+            'Максимальное время приготовления - '
             f'{settings.MAX_COOKING_TIME} мин. !'
         )
 

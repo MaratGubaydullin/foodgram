@@ -9,13 +9,13 @@ app_name = 'api'
 
 router_v1 = DefaultRouter()
 
-router_v1.register(r'ingredients', IngredientListViewSet,
+router_v1.register('ingredients', IngredientListViewSet,
                    basename='ingredients')
-router_v1.register(r'recipes', RecipeManagementViewSet,
+router_v1.register('recipes', RecipeManagementViewSet,
                    basename='recipes')
-router_v1.register(r'tags', TagListViewSet,
+router_v1.register('tags', TagListViewSet,
                    basename='tags')
-router_v1.register(r'users', CustomUserViewSet,
+router_v1.register('users', CustomUserViewSet,
                    basename='users')
 
 urls = [
